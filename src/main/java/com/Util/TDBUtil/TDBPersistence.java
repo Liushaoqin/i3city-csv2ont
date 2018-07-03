@@ -1,15 +1,18 @@
 package com.Util.TDBUtil;
 
+import org.apache.jena.ontology.OntModel;
 import org.apache.jena.query.Dataset;
 import org.apache.jena.query.ReadWrite;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.tdb.TDBFactory;
-import org.apache.jena.ontology.OntModel;
 import org.apache.jena.util.FileManager;
 import org.nlpcn.commons.lang.util.logging.Log;
 import org.nlpcn.commons.lang.util.logging.LogFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * @ Author     ：YangKai.
  * @ Date       ：Created in 15:45 2018/6/25
@@ -17,8 +20,9 @@ import java.util.*;
  * @ Version:     ${version}
  */
 public class TDBPersistence {
-    public Dataset dataset = null;
     public static final Log LOG = LogFactory.getLog();
+    public Dataset dataset = null;
+
     /**
      * 建立TDB数据文件夹；
      */

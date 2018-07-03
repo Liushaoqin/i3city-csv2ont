@@ -1,24 +1,14 @@
 package com.Util.OntUtil;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.sql.SQLOutput;
-import java.util.*;
-
-import com.Util.TDBUtil.TDBPersistence;
-import com.sun.jndi.toolkit.url.Uri;
-import org.apache.jena.ontology.*;
-import org.apache.jena.rdf.model.Model;
-import org.apache.jena.rdf.model.ModelFactory;
-import org.apache.jena.rdf.model.ModelMaker;
-import org.apache.jena.rdf.model.RDFWriter;
-import org.apache.jena.util.FileManager;
-
 import com.config.Config;
-import org.apache.jena.vocabulary.XSD;
+import org.apache.jena.ontology.*;
+import org.apache.jena.rdf.model.ModelFactory;
+import org.apache.jena.rdf.model.RDFWriter;
 
-import javax.sound.midi.Soundbank;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * @ Author     ：YangKai.
@@ -29,31 +19,33 @@ import javax.sound.midi.Soundbank;
 public class OntoManager {
     public OntModel model;
 
-    public OntoManager() {}
+    public OntoManager() {
+    }
 
-    public OntModel CreatNewOntModel(){
+    public OntModel CreatNewOntModel() {
         this.model = ModelFactory.createOntologyModel(OntModelSpec.OWL_MEM);
         return this.model;
     }
 
-//    not finish
+    //    not finish
 //    public OntModel CreatOntWithTDB(String tdbPath){
 //        TDBPersistence tdbp = new TDBPersistence(tdbPath);
 //        this.model = tdbp.getDefaultModel();
 //        return this.model;
 //    }
     //not finish
-    public OntModel ReadOntByOWLSimple(String OWLFilePath){
+    public OntModel ReadOntByOWLSimple(String OWLFilePath) {
         this.model.read("file:" + OWLFilePath);
         return this.model;
     }
+
     //not finish
-    public OntModel ReadOntByUrl(){
+    public OntModel ReadOntByUrl() {
         this.model.read(Config.ontoUrl);
         return this.model;
     }
 
-    public OntModel ReadOntByOWLDocMgr(String owlFilePath, String owlFileName){
+    public OntModel ReadOntByOWLDocMgr(String owlFilePath, String owlFileName) {
         //读取本体
         OntDocumentManager ontDocMgr = new OntDocumentManager();
         // set ontDocMgr's properties here
@@ -67,16 +59,16 @@ public class OntoManager {
         return this.model;
     }
 
-    public void WriteOntByOWLDocMgr(String OWLFilePath, String owlFileName){
+    public void WriteOntByOWLDocMgr(String OWLFilePath, String owlFileName) {
         //输出owl文件到文件系统
         try {
             FileOutputStream fileOS = new FileOutputStream(OWLFilePath + owlFileName);
             RDFWriter rdfWriter = this.model.getWriter("RDF/XML");
-            rdfWriter.setProperty("showXMLDeclaration","true");
+            rdfWriter.setProperty("showXMLDeclaration", "true");
             rdfWriter.setProperty("showDoctypeDeclaration", "true");
             rdfWriter.write(this.model, fileOS, null);
             fileOS.close();
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
         //用writer就不需要用下面的方法了
@@ -84,13 +76,13 @@ public class OntoManager {
     }
 
 
-    public OntClass setConcept(String ConceptName){
+    public OntClass setConcept(String ConceptName) {
         OntClass conceptClass = this.model.createClass(Config.ontoPrefix + ConceptName);
         conceptClass.addComment(Config.conceptClass, "en");
         return conceptClass;
     }
 
-    public OntClass getConcept(String ConceptName){
+    public OntClass getConcept(String ConceptName) {
         return this.model.getOntClass(Config.ontoPrefix + ConceptName);
     }
 
@@ -109,23 +101,23 @@ public class OntoManager {
         return conceptClass;
     }
 
-    public DatatypeProperty setProperty(OntClass concept, String propertyName, String dataType){
+    public DatatypeProperty setProperty(OntClass concept, String propertyName, String dataType) {
         Config config = new Config();
-        DatatypeProperty dtp = concept.getOntModel().createDatatypeProperty(concept.getURI()+ "#" + propertyName);
+        DatatypeProperty dtp = concept.getOntModel().createDatatypeProperty(concept.getURI() + "#" + propertyName);
         dtp.addDomain(concept);
         dtp.addRange(config.dataTypeMap.get(dataType));
         return dtp;
     }
 
-    public boolean hasProperty(OntClass concept, String propertyName){
-        return concept.hasProperty(concept.getOntModel().getDatatypeProperty(concept.getURI()+ "#" + propertyName));
+    public boolean hasProperty(OntClass concept, String propertyName) {
+        return concept.hasProperty(concept.getOntModel().getDatatypeProperty(concept.getURI() + "#" + propertyName));
     }
 
-    public List<DatatypeProperty> getPropertyListByConcept(OntClass concept){
+    public List<DatatypeProperty> getPropertyListByConcept(OntClass concept) {
         List<DatatypeProperty> dpl = new ArrayList<>();
-        for(Iterator ipp = concept.listDeclaredProperties(false); ipp.hasNext();){
+        for (Iterator ipp = concept.listDeclaredProperties(false); ipp.hasNext(); ) {
             OntProperty p = (OntProperty) ipp.next();
-            if(p.isDatatypeProperty()){
+            if (p.isDatatypeProperty()) {
                 dpl.add(p.convertToDatatypeProperty());
 //                System.out.println("DataTypeProperty: " + p.getLocalName());
             }
@@ -156,7 +148,7 @@ public class OntoManager {
 //        return propertyClass;
 //    }
 
-    public ObjectProperty addRelation(String propertyName, OntClass ontDomain, OntClass ontRange, String propertyLabel){
+    public ObjectProperty addRelation(String propertyName, OntClass ontDomain, OntClass ontRange, String propertyLabel) {
         ObjectProperty op = this.model.createObjectProperty(Config.ontoPrefix + propertyName);
         op.addDomain(ontDomain);
         op.addRange(ontRange);

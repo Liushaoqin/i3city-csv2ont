@@ -3,7 +3,6 @@ package com.Util.OntUtil;
 import com.config.Config;
 import com.ontology.datapreparation.CorConceptModel;
 import org.apache.jena.ontology.OntClass;
-import org.apache.jena.ontology.OntModel;
 
 /**
  * @ Author     ：YangKai.
@@ -12,14 +11,14 @@ import org.apache.jena.ontology.OntModel;
  * @ Version:     ${version}
  */
 public class OntoManagerTest {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         CorConceptModel core = new CorConceptModel();
 
         //test getconcept
         System.out.println(core.getConcept("basicEntity").getLabel("ch"));
 
         //test concept list
-        for(OntClass oc : core.getConceptList()){
+        for (OntClass oc : core.getConceptList()) {
             System.out.println(oc.getLabel("ch"));
         }
 

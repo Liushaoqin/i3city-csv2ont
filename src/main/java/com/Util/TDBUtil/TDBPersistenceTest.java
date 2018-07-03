@@ -1,6 +1,7 @@
 package com.Util.TDBUtil;
 
 import java.util.List;
+
 /**
  * @ Author     ：YangKai.
  * @ Date       ：Created in 16:44 2018/6/25
@@ -26,7 +27,6 @@ public class TDBPersistenceTest {
     }
 
 
-
     static void loadModel() {
 
         //TDB的数据文件夹地址；
@@ -45,7 +45,7 @@ public class TDBPersistenceTest {
         tdbPersistence.closeTDB();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         listModels();
 
     }

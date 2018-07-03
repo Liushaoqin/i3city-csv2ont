@@ -4,7 +4,6 @@ import org.apache.jena.rdf.model.Resource;
 import org.apache.jena.vocabulary.XSD;
 
 import java.util.HashMap;
-import java.util.Map;
 
 
 /**
@@ -22,10 +21,10 @@ public class Config {
 
     public static String bjGovData = "src/main/java/com/ontology/out/bj_gov_data/";
     public static String owlPath = "src/main/java/com/ontology/out/OWL/";
-    public static HashMap<String,Resource> dataTypeMap = new HashMap<String, Resource>();
+    public static HashMap<String, Resource> dataTypeMap = new HashMap<String, Resource>();
     public static int enRandomURILength = 10;
 
-    public Config(){
+    public Config() {
         dataTypeMap.put("String", XSD.xstring);
     }
 }

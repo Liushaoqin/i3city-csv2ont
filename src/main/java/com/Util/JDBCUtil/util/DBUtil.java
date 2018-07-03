@@ -300,7 +300,7 @@ public class DBUtil {
      *
      * @param tableName 表名
      * @param whereMap  where条件
-     * @return List<Map < String ,   Object>>
+     * @return List<Map       <       String       ,               Object>>
      * @throws SQLException
      */
     public static List<Map<String, Object>> query(String tableName,
@@ -328,7 +328,7 @@ public class DBUtil {
      * @param tableName   表名
      * @param whereClause where条件的sql
      * @param whereArgs   where条件中占位符中的值
-     * @return List<Map < String ,   Object>>
+     * @return List<Map       <       String       ,               Object>>
      * @throws SQLException
      */
     public static List<Map<String, Object>> query(String tableName,
@@ -349,7 +349,7 @@ public class DBUtil {
      * @param having        筛选
      * @param orderBy       排序
      * @param limit         分页
-     * @return List<Map < String ,   Object>>
+     * @return List<Map       <       String       ,               Object>>
      * @throws SQLException
      */
     public static List<Map<String, Object>> query(String tableName,
@@ -367,12 +367,12 @@ public class DBUtil {
     }
 
     /**
-     * @description: 根据指定的数据库表和数据列查询数据
-     * @Param: tableName
-     * @Param: columns
-     * @return: java.util.List<java.util.Map < java.lang.String , java.lang.Object>>
-     * @throw:
-     * @date: 2018/6/18
+     * @ description: 根据指定的数据库表和数据列查询数据
+     * @ Param: tableName
+     * @ Param: columns
+     * @ return: java.util.List<java.util.Map   <   java.lang.String   ,   java.lang.Object>>
+     * @ throw:
+     * @ date: 2018/6/18
      */
     public static List<Map<String, Object>> QueryDatabycolumns(String tableName, String[] columns) {
         List<Map<String, Object>> result = new ArrayList<>();
@@ -389,7 +389,7 @@ public class DBUtil {
      *
      * @param sql      要执行的sql语句
      * @param bindArgs 绑定的参数
-     * @return List<Map < String ,   Object>>结果集对象
+     * @return List<Map       <       String       ,               Object>>结果集对象
      * @throws SQLException SQL执行异常
      */
     public static List<Map<String, Object>> executeQuery(String sql, Object[] bindArgs) throws SQLException {
